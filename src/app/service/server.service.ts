@@ -11,33 +11,33 @@ import { Status } from '../enum/status.enum';
 export class ServerService {
 
 
-  private readonly apiUrl = '';
+  private readonly myApiUrl = 'http://localhost:8080';
 
   constructor(private http: HttpClient) { }
 
   servers$ = <Observable<CustomResponse>>
-  this.http.get<CustomResponse>(`${this.apiUrl}/server/list`)
+  this.http.get<CustomResponse>(`${this.myApiUrl}/server/list`)
   .pipe(
-    tap(console.log),
-    catchError(this.handleError)
+  tap(console.log),
+  catchError(this.handleError)
   )
 
   server$ = (server: Server) => <Observable<CustomResponse>>
-  this.http.post<CustomResponse>(`${this.apiUrl}/server/save`, server)
+  this.http.post<CustomResponse>(`${this.myApiUrl}/server/save`, server)
   .pipe(
     tap(console.log),
     catchError(this.handleError)
   )
 
   ping$ = (ipAddress: string) => <Observable<CustomResponse>>
-  this.http.get<CustomResponse>(`${this.apiUrl}/server/ping/${ipAddress}`)
+  this.http.get<CustomResponse>(`${this.myApiUrl}/server/ping/${ipAddress}`)
   .pipe(
     tap(console.log),
     catchError(this.handleError)
   )
 
   delete$ = (serverId: number) => <Observable<CustomResponse>>
-  this.http.delete<CustomResponse>(`${this.apiUrl}/server/delete/${serverId}`)
+  this.http.delete<CustomResponse>(`${this.myApiUrl}/server/delete/${serverId}`)
   .pipe(
     tap(console.log),
     catchError(this.handleError)
